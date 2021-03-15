@@ -4,7 +4,7 @@ from web import webscra
 
 #token
 texto = webscra()
-TOKEN = ("1694856172:AAHe3ibvW85P1fUge2v2n4ES3DnJq3mkRuk")
+TOKEN = ("CHAVE_KEY")
 bot = telebot.TeleBot(TOKEN)
 #commands
 @bot.message_handler(commands=['start','help'])
