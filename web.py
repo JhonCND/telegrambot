@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import emoji
 
 def webscraping():
 
@@ -12,14 +13,23 @@ def webscraping():
   if data.status_code == requests.codes.ok:
     info =  BeautifulSoup(data.text, 'html.parser')
     blocos = ((info.find('table', {'id': 'economicCalendarData'})).find('tbody')).findAll('tr', {'class': 'js-event-item'})
-    
+    #ornazidor
     for blocos2 in blocos:
           impacto = str((blocos2.find('td',{'class': 'sentiment'})).get('data-img_key')).replace('bull', '')
           hora = str(blocos2.get('data-event-datetime')).replace('/', '-')
           moeda = (blocos2.find('td', {'class': 'left flagCur noWrap'})).text.strip()
           horas = (hora[10:16])
+    #emoji
+    if(impacto == "1"):
+      impacto = (emoji.emojize('teste:star:'))
 
-          #resultados.append({'par': moeda,'horas': horas, 'impacto': impacto})]
+    if(impacto == "2"):
+      impacto = (emoji.emojize('teste:star::star:'))
+
+    if(impacto == "3"):
+      impacto = (emoji.emojize('teste:star::star::star:'))
+    return impacto
+
   for info in resultados:
     result+=str("{0} {1} {2} {3} {4} {5} {6}".format('PARIDADE: ', info['par'],'\n HORA: ', info['horas'], '\n IMPACTO: ', info['impacto'], '\n------------\n'))
   return result
